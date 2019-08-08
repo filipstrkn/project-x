@@ -1,0 +1,85 @@
+# ---------------------------------------------------------------
+#  General
+# ---------------------------------------------------------------
+#
+#
+*/**/.DS_Store
+*/**/*.tgz
+*/**/.idea
+*/**/.editorconfig
+
+
+# ---------------------------------------------------------------
+#  Project specific
+# ---------------------------------------------------------------
+#
+#
+*/**/bower_components
+*/**/node_modules
+*/**/.npm
+*/.env
+
+
+# ---------------------------------------------------------------
+#  Client
+# ---------------------------------------------------------------
+#
+#
+
+# Nuxt generate
+client/dist
+
+# nuxt.js build output
+client/.nuxt
+
+# Service worker
+client/sw.*
+
+# Logs
+client/logs
+client/*.log
+npm-debug.log*
+
+# Runtime data
+client/pids
+client/*.pid
+client/*.seed
+client/*.pid.lock
+
+# Compiled binary addons
+client/build/Release
+client/jspm_packages/
+
+# Directory for instrumented libs
+client/lib-cov
+
+# Coverage directory
+client/coverage
+
+# Grunt intermediate storage
+.grunt
+
+# node-waf configuration
+client/.lock-wscript
+
+# parcel-bundler cache
+client/.cache
+
+# Serverless directories
+client/.serverless
+
+# Optional REPL history
+.node_repl_history
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,21 @@
+{
+  "name": "project-x-backend",
+  "version": "1.0.0",
+  "description": "Backend of Project X",
+  "repository": "gitlab.com:filipstrkn/project-x.git",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "Storkan & Wiseman",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.8.1",
+    "graphql": "^14.4.2",
+    "mongoose": "^5.6.8"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
