@@ -1,6 +1,3 @@
-# projectx
-
-> the best project
 
 ## Build Setup
 

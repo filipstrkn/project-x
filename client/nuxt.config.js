@@ -1,5 +1,5 @@
 
-module.exports = {
+export default {
   mode: 'universal',
   /*
   ** Headers of the page
@@ -38,6 +38,7 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/pwa',
   ],
   /*
   ** Build configuration
