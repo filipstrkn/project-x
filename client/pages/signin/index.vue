@@ -5,7 +5,11 @@
             <h3>Sign in</h3>
             <form-input
                 :label="'email'"
-                :type="'email'"
+                :error="'Please enter a valid email'"
+            />
+            <form-input
+                :label="'password'"
+                :type="'password'"
                 :error="'Please enter a valid email'"
             />
             <button>Next</button>
@@ -37,6 +41,18 @@ export default {
 </script>
 
 
-<style lang="stylus">
+<style lang="stylus" scoped>
+
+#Signin
+    display flex
+    align-items center
+    justify-content center
+    height 100vh
+    width 100%
+
+    form
+        width 400px
+        height @width
+
 
 </style>

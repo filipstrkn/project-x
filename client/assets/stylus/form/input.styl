@@ -1,0 +1,56 @@
+.form--input
+    position relative
+    margin 1.6em
+    border none
+    outline none
+    border solid 1px #cacaca
+    border-radius: 30em
+    transition: border-color 150ms ease-out
+
+    &.active
+        border-color: #888
+        & > label
+            font-size .65em !important
+            left 2.4em !important
+            top 1.2em !important
+
+
+    label
+        position absolute
+        pointer-events none
+        left 1.6em
+        top 50%
+        transform translateY(-50%)
+        font-size: 1em
+        transition all 150ms ease-out
+
+
+    input
+        border: none
+        background: none
+        height 100%
+        width 100%
+        padding 1.3em 1.6em .45em 1.6em
+        font-size 1em
+
+    &.is-small
+        width 20em
+
+
+    .form--input__icon
+        position absolute
+        right .3em
+        top 50%
+        transform: translateY(-50%)
+        border-radius: 100%
+        border: solid 1px #cacaca
+        width: 2.4em
+        height @width
+        text-align: center
+        line-height: 2.4
+        cursor pointer
+        transition: border-color 150ms ease-out
+        &:hover
+            border-color: #888
+
+// input[type="password"]
