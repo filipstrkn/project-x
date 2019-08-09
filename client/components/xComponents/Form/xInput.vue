@@ -1,25 +1,29 @@
 <template>
     <div :class="['x-input', width, { 'active': isActive }]">
 
-        <label
-            v-if="typeof label === 'string' && label !== ''"
-        >
-        {{ label }}
-        <span v-if="type === 'password'">{{ strength }}</span>
+        <label v-if="typeof label === 'string' && label !== ''">
+            {{ label }}<span v-if="type === 'password'"> {{ strength }}</span>
         </label>
+
         <input
             v-model="inputVal"
             :type="inputType"
-            @input="setStrength"
+            @input="onInput"
             @focus="activate"
             @blur="checkContent"
         />
 
-        <i v-if="type === 'password'"
-            @click="toggleEye"
-            class="icon x-input__icon"
-            :class="blink ? 'ion-md-eye-off' : 'ion-md-eye'">
-        </i>
+        <div class="x-input__sides x-box">
+            <div v-if="isActive && validate" class="x-input__validation" :class="isValid && 'is-valid'">
+                <i v-show="isValid"  class="icon ion-md-checkmark" />
+            </div>
+
+            <i v-if="type === 'password'"
+                @click="toggleEye"
+                class="icon x-input__icon"
+                :class="blink ? 'ion-md-eye-off' : 'ion-md-eye'">
+            </i>
+        </div>
 
     </div>
 </template>
@@ -40,14 +44,20 @@ export default {
         type: {
             type: String,
             required: false,
-            default: 'text'
+            default: 'text',
+            validator: (val) => ['text', 'password'].includes(val)
         },
         size: {
             type: String,
             required: false
         },
-        validation: {
+        validate: {
             type: String,
+            required: false
+        },
+        isValid: {
+            type: Boolean,
+            default: false,
             required: false
         }
     },
@@ -75,6 +85,16 @@ export default {
         },
     },
     methods: {
+        onInput() {
+            if (this.validate && this.validate === 'email') {
+                const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                this.$emit('onValidate', re.test(this.inputVal.toLowerCase().trim()))
+            }
+            if (this.type === 'password') {
+                this.strength = this.getStrength(this.inputVal)
+            }
+
+        },
         activate() {
             this.isActive = true
         },
@@ -95,22 +115,12 @@ export default {
             this.blink = !this.blink
         },
         getStrength(str) {
-
             const strongRe = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})")
             const mediumRe = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})")
 
-            if (strongRe.test(str)) {
-                console.log('strong')
-                return '😍'
-
-            } else if (mediumRe.test(str)) {
-                console.log('medium')
-                return '🙂'
-
-            } else if (str.length > 3) {
-                console.log('weak')
-                return '😳'
-            }
+            if (strongRe.test(str)) return '😍'
+            else if (mediumRe.test(str)) return '🙂'
+            else if (str.length > 3) return '😳'
             return ''
         },
         setStrength(){
@@ -123,5 +133,42 @@ export default {
 
 <style lang="stylus">
 @import "~assets/stylus/form/input"
+
+.x-input__sides
+    position absolute
+    top 50%
+    right .3em
+    transform: translateY(-50%)
+    align-items center
+
+    & > *
+        flex-grow 0
+        flex-shrink 0
+
+
+.x-input__icon
+    border-radius: 100%
+    border: solid 1px #cacaca
+    width: 2.4em
+    height @width
+    text-align: center
+    line-height: 2.4
+    transition: border-color 150ms ease-out
+
+.x-input__validation
+    transform: scale(.3)
+    border-radius: 100%
+    background-color #000
+    margin .36em
+    width: 1.6em
+    height @width
+    text-align: center
+    line-height: 1.6
+    transition: all 250ms ease-out
+
+    &.is-valid
+        background-color #eedeff
+        transform: scale(1)
+
 
 </style>

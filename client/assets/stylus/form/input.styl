@@ -9,6 +9,7 @@
 
     &.active
         border-color: #888
+        outline: none
         & > label
             font-size .65em !important
             left 2.4em !important
@@ -35,22 +36,3 @@
 
     &.is-small
         width 20em
-
-
-    .x-input__icon
-        position absolute
-        right .3em
-        top 50%
-        transform: translateY(-50%)
-        border-radius: 100%
-        border: solid 1px #cacaca
-        width: 2.4em
-        height @width
-        text-align: center
-        line-height: 2.4
-        cursor pointer
-        transition: border-color 150ms ease-out
-        &:hover
-            border-color: #888
-
-// input[type="password"]

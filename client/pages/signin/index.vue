@@ -1,36 +1,49 @@
  <template>
     <section id="Signin">
 
-        <form action="">
-            <h3>Sign in</h3>
-            <div v-show="step === 0">
+
+        <h3>Sign in</h3>
+            <div v-show="steps.current === 0">
                 <x-input
                     v-model="form.email"
-                    :label="'email'"
-                    :error="'Please enter a valid email'"
+                    :label="steps.email.label"
+                    :type="steps.email.type"
+                    :error="steps.email.error"
+                    :validate="'email'"
+                    :isValid="steps.email.valid"
+                    @onValidate="val => (steps.email.valid = val)"
                 />
-                <div class="x-box is-justified-right">
-                    <x-button @action="onSubmit">
+                <div class="x-box">
+                    <x-button
+                        class="x-box--child is-flex"
+                        :disabled="!steps.email.valid"
+                        @action="makeStep(true)">
                         Next
                     </x-button>
                 </div>
             </div>
 
-            <div v-show="step === 1">
+            <div v-show="steps.current === 1">
                 <x-input
                     v-model="form.password"
-                    :label="'password'"
-                    :type="'password'"
-                    :error="'Please enter a valid email'"
+                    :label="steps.password.label"
+                    :type="steps.password.type"
+                    :error="steps.password.error"
                 />
+
                 <div class="x-box is-justified-between">
-                    <x-button @action="makeStep(false)">
-                        <i class="icon x-input__icon ion-md-arrow-back" />
+                    <x-button
+                        @action="makeStep(false)">
+                        <i class="icon ion-md-arrow-back" />
                     </x-button>
-                    <x-button @action="onSubmit" class="is-primary is-large">Login</x-button>
+                    <x-button
+                        class="x-box--child is-primary is-large"
+                        :disabled="!(form.password.length > 3)"
+                        @action="onSubmit">
+                        Login
+                    </x-button>
                 </div>
             </div>
-        </form>
 
     </section>
 </template>
@@ -44,25 +57,24 @@ export default {
     name: 'SigninPage',
     layout: 'simple',
     data: () => ({
-        step: 0,
-        steps: [
-            {
-                model: 'email',
+        steps: {
+            current: 0,
+            email: {
                 label: 'email',
                 type: 'text',
-                error: 'Please enter a valid email'
+                error: 'Please enter a valid email',
+                valid: false,
+                validate: true
             },
-            {
-                model: 'password',
+            password: {
                 label: 'password',
                 type: 'password',
                 error: 'your password should'
             }
-        ],
-        finalStep: 1,
+        },
         form: {
-            email: null,
-            password: null
+            email: '',
+            password: ''
         }
     }),
     components: {
@@ -71,9 +83,9 @@ export default {
     },
     methods: {
         makeStep(where) {
-            this.step = where
-                ? ( this.step + 1 )
-                : ( this.step - 1 )
+            this.steps.current = where
+                ? ( this.steps.current + 1 )
+                : ( this.steps.current - 1 )
         },
         signIn(form) {
             fetch('POST', {
@@ -83,20 +95,21 @@ export default {
             // -> change route
             // -> repeat
         },
-        onSubmit() {
-            if (this.step === this.finalStep) this.signIn(this.form)
-            else this.makeStep(true)
+        onSubmit(e) {
+            e.preventDefault()
+            this.signIn(this.form)
         }
     }
 }
 </script>
 
 
-<style lang="stylus" scoped>
+<style lang="stylus">
 @import "~assets/stylus/button"
 
 #Signin
     display flex
+    flex-direction column
     align-items center
     justify-content center
     height 100vh
@@ -105,9 +118,8 @@ export default {
     h3
         text-align center
 
-    form
+    & > div
         width 20em
-        height @width
 
 .x-box
     display flex
@@ -116,5 +128,12 @@ export default {
 
     &.is-justified-right
         justify-content flex-end
+
+
+.x-box--child
+    &.is-right
+        align-self flex-end
+    &.is-flex
+        flex 1
 
 </style>

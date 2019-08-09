@@ -11,6 +11,11 @@
     line-height: 2.6
     margin 0 -3px
     cursor pointer
+    transition: background-color 150ms ease-out
+
+    &:hover
+        background-color: #eee
+
     *
         margin: 0
 
@@ -19,3 +24,9 @@
     &.is-primary
         background-color: #000
         color: #fff
+
+    &[disabled]
+        background-color: #f7f7f7
+        color: alpha(#000, .3)
+        opacity .7
+        pointer-events: none
