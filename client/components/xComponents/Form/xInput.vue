@@ -154,6 +154,7 @@ export default {
     text-align: center
     line-height: 2.4
     transition: border-color 150ms ease-out
+    cursor pointer
 
 .x-input__validation
     transform: scale(.3)

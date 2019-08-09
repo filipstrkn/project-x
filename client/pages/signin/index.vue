@@ -1,8 +1,8 @@
  <template>
     <section id="Signin">
 
-
-        <h3>Sign in</h3>
+        <div class="signin-bpdy">
+            <h3>Sign in</h3>
             <div v-show="steps.current === 0">
                 <x-input
                     v-model="form.email"
@@ -44,6 +44,11 @@
                     </x-button>
                 </div>
             </div>
+        </div>
+
+
+        <nuxt-link class="x-link" :to="'/'">I am new here</nuxt-link>
+        <nuxt-link class="x-link" :to="'/'">I have forgot password</nuxt-link>
 
     </section>
 </template>
@@ -106,6 +111,7 @@ export default {
 
 <style lang="stylus">
 @import "~assets/stylus/button"
+@import "~assets/stylus/link"
 
 #Signin
     display flex
@@ -135,5 +141,8 @@ export default {
         align-self flex-end
     &.is-flex
         flex 1
+
+.signin-bpdy
+    margin-bottom 10vh
 
 </style>
