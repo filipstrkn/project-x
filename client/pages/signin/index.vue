@@ -8,7 +8,6 @@
                     v-model="form.email"
                     :label="steps.email.label"
                     :type="steps.email.type"
-                    :error="steps.email.error"
                     :validate="'email'"
                     :isValid="steps.email.valid"
                     @onValidate="val => (steps.email.valid = val)"
@@ -28,7 +27,6 @@
                     v-model="form.password"
                     :label="steps.password.label"
                     :type="steps.password.type"
-                    :error="steps.password.error"
                 />
 
                 <div class="x-box is-justified-between">
@@ -66,15 +64,13 @@ export default {
             current: 0,
             email: {
                 label: 'email',
-                type: 'text',
-                error: 'Please enter a valid email',
+                type: 'email',
                 valid: false,
                 validate: true
             },
             password: {
                 label: 'password',
-                type: 'password',
-                error: 'your password should'
+                type: 'password'
             }
         },
         form: {

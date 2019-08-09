@@ -14,15 +14,19 @@
         />
 
         <div class="x-input__sides x-box">
-            <div v-if="isActive && validate" class="x-input__validation" :class="isValid && 'is-valid'">
+            <div
+                v-if="isActive && validate"
+                class="x-input__validation"
+                :class="isValid && 'is-valid'">
                 <i v-show="isValid"  class="icon ion-md-checkmark" />
             </div>
 
-            <i v-if="type === 'password'"
+            <div
+                v-if="type === 'password'"
                 @click="toggleEye"
-                class="icon x-input__icon"
-                :class="blink ? 'ion-md-eye-off' : 'ion-md-eye'">
-            </i>
+                class="x-input__icon">
+                <i class="icon" :class="blink ? 'ion-md-eye-off' : 'ion-md-eye'" />
+            </div>
         </div>
 
     </div>
@@ -45,7 +49,7 @@ export default {
             type: String,
             required: false,
             default: 'text',
-            validator: (val) => ['text', 'password'].includes(val)
+            validator: (val) => ['text', 'password', 'email'].includes(val)
         },
         size: {
             type: String,
@@ -146,13 +150,21 @@ export default {
         flex-shrink 0
 
 
-.x-input__icon
+.x-input__icon,
+.x-input__validation
+    position relative
     border-radius: 100%
+    i
+        position absolute
+        left 50%
+        top 50%
+        transform translate(-50%, -50%)
+
+
+.x-input__icon
     border: solid 1px #cacaca
     width: 2.4em
     height @width
-    text-align: center
-    line-height: 2.4
     transition: border-color 150ms ease-out
     cursor pointer
 
