@@ -2,8 +2,8 @@
     <section id="Login">
 
         <div class="signin-body">
-            <h3>Welcome back</h3>
-            <div v-show="steps.current === 0">
+            <h3>Reset password</h3>
+            <div>
                 <x-input
                     v-model="form.email"
                     :label="steps.email.label"
@@ -14,40 +14,14 @@
                 />
                 <div class="x-box">
                     <x-button
-                        class="x-box--child is-flex"
+                        class="x-box--child is-flex is-primary"
                         :disabled="!steps.email.valid"
                         @action="makeStep(true)">
-                        Next
-                    </x-button>
-                </div>
-            </div>
-
-            <div v-show="steps.current === 1">
-                <x-input
-                    v-model="form.password"
-                    :label="steps.password.label"
-                    :type="steps.password.type"
-                />
-
-                <div class="x-box is-justified-between">
-                    <x-button
-                        @action="makeStep(false)">
-                        <i class="icon ion-md-arrow-back" />
-                    </x-button>
-                    <x-button
-                        class="x-box--child is-primary is-large"
-                        :disabled="!(form.password.length > 3)"
-                        @action="onSubmit">
-                        Login
+                        Reset
                     </x-button>
                 </div>
             </div>
         </div>
-
-
-        <nuxt-link class="x-link" :to="'/signup'">I am new here</nuxt-link>
-        <nuxt-link class="x-link" :to="'/login/forgot'">What is my password?</nuxt-link>
-
     </section>
 </template>
 
@@ -57,20 +31,13 @@ import xInput from '~/components/xComponents/Form/xInput'
 import xButton from '~/components/xComponents/Form/xButton'
 
 export default {
-    name: 'SigninPage',
-    layout: 'simple',
     data: () => ({
         steps: {
-            current: 0,
             email: {
                 label: 'email',
                 type: 'email',
                 valid: false,
                 validate: true
-            },
-            password: {
-                label: 'password',
-                type: 'password'
             }
         },
         form: {
