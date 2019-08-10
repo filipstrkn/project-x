@@ -23,7 +23,7 @@ ul
     transform translateX(-50%)
     width 100%
     max-width 30em
-    padding 0 .6em
+    padding 0 1em
     box-sizing border-box
 
 </style>

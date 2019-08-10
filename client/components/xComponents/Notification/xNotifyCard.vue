@@ -35,17 +35,18 @@ li
     display block
     min-height: 6em
     width 100%
-    margin .6em 0
+    margin 1em 0
     border-radius 8px
     border solid 1px
+    box-shadow var(--deep-shadow)
 
     &.is-danger
         background-color PINK
-        border-color PINK - 16
+        border-color PINK - 14
 
     &.is-info
         background-color BLUE
-        border-color BLUE - 16
+        border-color BLUE - 14
 
 .close
     position absolute
