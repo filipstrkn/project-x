@@ -33,7 +33,7 @@ client/dist
 client/.nuxt
 
 # Service worker
-client/sw.*
+client/**/sw.*
 
 # Logs
 client/logs
