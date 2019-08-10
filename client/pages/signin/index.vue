@@ -27,6 +27,7 @@
                     v-model="form.password"
                     :label="steps.password.label"
                     :type="steps.password.type"
+                    :validate="'password'"
                 />
 
                 <div class="x-box is-justified-between">
@@ -106,9 +107,6 @@ export default {
 
 
 <style lang="stylus">
-@import "~assets/stylus/button"
-@import "~assets/stylus/link"
-
 #Signin
     display flex
     flex-direction column

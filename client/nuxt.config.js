@@ -24,6 +24,7 @@ export default {
   ** Global CSS
   */
   css: [
+    '@/assets/xStyles.styl'
   ],
   /*
   ** Plugins to load before mounting the App

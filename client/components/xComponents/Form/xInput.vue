@@ -9,14 +9,14 @@
             v-model="inputVal"
             :type="inputType"
             @input="onInput"
-            @focus="activate"
-            @blur="checkContent"
+            @focus="toggleActive(false)"
+            @blur="isEmpty"
         />
 
-        <div class="x-input__sides x-box">
+        <div class="input__sides x-box">
             <div
                 v-if="isActive && validate"
-                class="x-input__validation"
+                class="input__validation"
                 :class="isValid && 'is-valid'">
                 <i v-show="isValid"  class="icon ion-md-checkmark" />
             </div>
@@ -24,7 +24,7 @@
             <div
                 v-if="type === 'password'"
                 @click="toggleEye"
-                class="x-input__icon">
+                class="input__icon">
                 <i class="icon" :class="blink ? 'ion-md-eye-off' : 'ion-md-eye'" />
             </div>
         </div>
@@ -66,7 +66,7 @@ export default {
         }
     },
     data() {
-    return {
+        return {
             inputVal: this.value,
             isActive: false,
             blink: false,
@@ -94,26 +94,16 @@ export default {
                 const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
                 this.$emit('onValidate', re.test(this.inputVal.toLowerCase().trim()))
             }
-            if (this.type === 'password') {
+            if (this.validate && this.validate === 'password') {
                 this.strength = this.getStrength(this.inputVal)
             }
 
         },
-        activate() {
-            this.isActive = true
-        },
         toggleActive(val) {
-            if (val) {
-                this.isActive = false
-            } else {
-                this.isActive = true
-            }
+            this.isActive = !val
         },
-        checkContent(e) {
+        isEmpty(e) {
             this.toggleActive(!!!e.target.value.length)
-        },
-        onValidate() {
-            this.$emit('onValidate')
         },
         toggleEye() {
             this.blink = !this.blink
@@ -126,19 +116,14 @@ export default {
             else if (mediumRe.test(str)) return '🙂'
             else if (str.length > 3) return '😳'
             return ''
-        },
-        setStrength(){
-            this.strength = this.getStrength(this.inputVal)
         }
     }
 
 }
 </script>
 
-<style lang="stylus">
-@import "~assets/stylus/form/input"
-
-.x-input__sides
+<style lang="stylus" scoped>
+.input__sides
     position absolute
     top 50%
     right .3em
@@ -150,8 +135,8 @@ export default {
         flex-shrink 0
 
 
-.x-input__icon,
-.x-input__validation
+.input__icon,
+.input__validation
     position relative
     border-radius: 100%
     i
@@ -161,14 +146,14 @@ export default {
         transform translate(-50%, -50%)
 
 
-.x-input__icon
+.input__icon
     border: solid 1px #cacaca
     width: 2.4em
     height @width
     transition: border-color 150ms ease-out
     cursor pointer
 
-.x-input__validation
+.input__validation
     transform: scale(.3)
     border-radius: 100%
     background-color #000
@@ -182,6 +167,4 @@ export default {
     &.is-valid
         background-color #eedeff
         transform: scale(1)
-
-
 </style>
