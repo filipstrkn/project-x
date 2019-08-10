@@ -1,6 +1,8 @@
 <template>
     <ul>
         <x-notify-card :notification="{type: 'danger'}" />
+        <x-notify-card :notification="{type: 'info'}" />
+        <x-notify-card :notification="{type: 'success'}" />
     </ul>
 </template>
 

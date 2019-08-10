@@ -45,8 +45,12 @@ li
         border-color PINK - 14
 
     &.is-info
-        background-color BLUE
-        border-color BLUE - 14
+        background-color YELLOW
+        border-color YELLOW - 14
+
+    &.is-success
+        background-color GREEN
+        border-color GREEN - 14
 
 .close
     position absolute
