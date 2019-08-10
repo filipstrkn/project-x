@@ -1,8 +1,8 @@
  <template>
-    <section id="Signin">
+    <section id="Login">
 
         <div class="signin-body">
-            <h3>Sign in</h3>
+            <h3>Nice to meet you</h3>
             <div v-show="steps.current === 0">
                 <x-input
                     v-model="form.email"
@@ -46,8 +46,7 @@
         </div>
 
 
-        <nuxt-link class="x-link" :to="'/'">I am new here</nuxt-link>
-        <nuxt-link class="x-link" :to="'/'">I have forgot password</nuxt-link>
+        <nuxt-link class="x-link" :to="'/login'">I have an account</nuxt-link>
 
     </section>
 </template>
@@ -58,7 +57,6 @@ import xInput from '~/components/xComponents/Form/xInput'
 import xButton from '~/components/xComponents/Form/xButton'
 
 export default {
-    name: 'SigninPage',
     layout: 'simple',
     data: () => ({
         steps: {
@@ -92,11 +90,24 @@ export default {
         signIn(form) {
             fetch('http://localhost:3002/auth/login', {
                 method: 'POST',
-                mode: 'no-cors',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: form
+                body: JSON.stringify(this.form)
+            })
+            .then(res => {
+                if (res.status === 200) return res.json()
+                if (res.status >= 400 && res.status < 500) {
+                    // run and error dialog
+                }
+            })
+            .then(tokens => {
+                console.log(tokens.access_token)
+                // save tokens to local storage
+                // move to project page
+            })
+            .catch(err => {
+                console.log(err)
             })
         },
         onSubmit() {
@@ -108,7 +119,7 @@ export default {
 
 
 <style lang="stylus" scoped>
-#Signin
+#Login
     display flex
     flex-direction column
     align-items center
