@@ -90,15 +90,16 @@ export default {
                 : ( this.steps.current - 1 )
         },
         signIn(form) {
-            fetch('POST', {
-
+            fetch('http://localhost:3002/auth/login', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: form
             })
-            // if success
-            // -> change route
-            // -> repeat
         },
-        onSubmit(e) {
-            e.preventDefault()
+        onSubmit() {
             this.signIn(this.form)
         }
     }
