@@ -1,7 +1,7 @@
  <template>
     <section id="Signin">
 
-        <div class="signin-bpdy">
+        <div class="signin-body">
             <h3>Sign in</h3>
             <div v-show="steps.current === 0">
                 <x-input
@@ -106,7 +106,7 @@ export default {
 </script>
 
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 #Signin
     display flex
     flex-direction column
@@ -121,22 +121,6 @@ export default {
     & > div
         width 20em
 
-.x-box
-    display flex
-    &.is-justified-between
-        justify-content space-between
-
-    &.is-justified-right
-        justify-content flex-end
-
-
-.x-box--child
-    &.is-right
-        align-self flex-end
-    &.is-flex
-        flex 1
-
-.signin-bpdy
+.signin-body
     margin-bottom 10vh
-
 </style>
