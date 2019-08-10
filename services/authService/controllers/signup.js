@@ -7,7 +7,7 @@ async function signup(req, res) {
     // Check if user already exist in db
     try {
         const isExisting = await UserModel.findOne({ email })
-        if (isExisting) res.status(409).send({
+        if (isExisting) return res.status(409).send({
             error: 'Email already exists'
         })
     } catch (err) {
