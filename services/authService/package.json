@@ -2,6 +2,7 @@
   "name": "authservice",
   "version": "1.0.0",
   "description": "Authenticator Microservoce",
+  "repository": "git@github.com:filipstrkn/project-x.git",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./index.js"
@@ -13,9 +14,12 @@
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
+    "email-templates": "^6.0.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.6.8"
+    "mongoose": "^5.6.8",
+    "nodemailer": "^6.3.0",
+    "pug": "^2.0.4"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"

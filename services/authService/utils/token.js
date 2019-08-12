@@ -60,10 +60,16 @@ const replaceRefreshToken = async (token, userId) => {
  */
 const refreshTokens = user => {
 
-    const { _id, email } = user
-    const accessToken = generateToken(['JWT_SECRET', 'JWT_LIFE'], {email, type: 'access'})
-    const refreshToken = generateToken(['REFRESH_SECRET', 'REFRESH_LIFE'], {email, type: 'refresh', userId: _id})
+    /**
+     *
+     */
+    const { _id } = user
+    const accessToken = generateToken(['JWT_SECRET', 'JWT_LIFE'], {type: 'access'})
+    const refreshToken = generateToken(['REFRESH_SECRET', 'REFRESH_LIFE'], {type: 'refresh', userId: _id})
 
+    /**
+     *
+     */
     return replaceRefreshToken(refreshToken, user._id)
         .then(res => {
             if (res.message === 'success') return {

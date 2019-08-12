@@ -8,6 +8,9 @@ function refresh(req, res) {
 
     const { refresh_token } = req.body
 
+    /**
+     *
+     */
     try {
         const token = jwt.verify(refresh_token, process.env.REFRESH_SECRET)
         if (token.type !== 'refresh') {
@@ -16,6 +19,9 @@ function refresh(req, res) {
             })
         }
 
+        /**
+         *
+         */
         return TokenModel
             .findOne({ userId: token.userId })
             .exec()
@@ -36,8 +42,12 @@ function refresh(req, res) {
             })
 
     } catch (err) {
+
+        /**
+         *
+         */
         if (err instanceof jwt.TokenExpiredError) {
-            res.status(400).json({
+            res.status(401).json({
                 message: 'Token expired'
             })
             return
@@ -49,9 +59,6 @@ function refresh(req, res) {
         }
 
     }
-
-
-
 
 }
 
