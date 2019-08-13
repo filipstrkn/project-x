@@ -30,7 +30,7 @@ async function sendVerifyEmail(req, res) {
     emailer.send({
         template: 'verification',
         locals: {
-            verificationLink: `http://localhost:3000/login/verification?${user._id}`
+            verificationLink: `http://localhost:3000/login/verification?user=${user._id}`
         }
     }).then(() => {
         res.status(200).json({
@@ -59,7 +59,7 @@ async function verifyUser(req, res) {
             verified: true
         })
         res.status(200).json({
-            message: `User's emai has been verified`,
+            message: `User's email has been verified`,
             userId
         })
 

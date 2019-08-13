@@ -1,9 +1,9 @@
 const { Schema, model } = require('mongoose')
 const crypto = require('crypto')
 const hashConfig = {
-    alg: 'sha512',
     len: 64,
-    rep: 1000
+    // alg: 'sha512',
+    // rep: 1000
 }
 
 
@@ -11,7 +11,7 @@ const UserSchema = new Schema({
     name: String,
     email: {
         type: String,
-        // required: true,
+        unique: true,
         validate: {
             validator(val) {
                 if (typeof val !== 'string') return false
@@ -22,16 +22,13 @@ const UserSchema = new Schema({
         }
     },
     hash: {
-        type: String,
-        // required: true
+        type: String
     },
     salt: {
-        type: String,
-        // required: true
+        type: String
     },
     verified: {
-        type: Boolean,
-        // default: false
+        type: Boolean
     }
 })
 
