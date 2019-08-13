@@ -1,7 +1,7 @@
 <template>
   <div>
     <nuxt />
-    <x-notify />
+    <!-- <x-notify /> -->
   </div>
 </template>
 
