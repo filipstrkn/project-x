@@ -7,7 +7,6 @@ const { refreshTokens } = require('../utils/token')
 function refresh(req, res) {
 
     const { refresh_token } = req.body
-
     /**
      *
      */
