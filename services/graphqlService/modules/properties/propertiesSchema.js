@@ -12,6 +12,10 @@ const propertiesSchema = gql`
         #     lat: String!
         #     lng: STring!
         # }
+        # body: [CustomInput]
+        # managers: [User!]
+        # residents: [User]
+        # pages: [Page]
     }
 
 `

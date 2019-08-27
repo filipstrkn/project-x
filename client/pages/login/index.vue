@@ -55,6 +55,7 @@
 <script>
 import xInput from '~/components/xComponents/Form/xInput'
 import xButton from '~/components/xComponents/Form/xButton'
+import Cookie from 'js-cookie'
 
 export default {
     name: 'SigninPage',
@@ -103,6 +104,9 @@ export default {
                 }
             })
             .then(tokens => {
+                localStorage.setItem('xTokens', JSON.stringify(tokens))
+                // Cookie.set('refresh', tokens.refresh_token)
+                this.$router.push('/')
                 console.log(tokens.access_token)
                 // save tokens to local storage
                 // move to project page

@@ -4,7 +4,7 @@ const PropertyModel = require('../../models/Property')
 const propertyResolvers = {
 
     Query: {
-        async properties(parent, args, context) {
+        async properties() {
             try {
                 const properties = await PropertyModel.find()
                 return properties

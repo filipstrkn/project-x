@@ -4,6 +4,7 @@ require('dotenv').config({
 require('./db')
 // -------------------------
 const { ApolloServer } = require('apollo-server');
+const auth = require('./utils/auth')
 
 
 /**
@@ -20,6 +21,10 @@ const server = new ApolloServer({
     formatError: err => ({
         message: err.message,
         status: err.extensions.code
+    }),
+    context: ({ req }) => auth({
+        access_token: req.headers.authorization || null,
+        refresh_token: req.headers['x-refresh'] || null
     })
 })
 
