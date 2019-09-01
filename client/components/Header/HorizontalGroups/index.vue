@@ -1,11 +1,12 @@
 <template>
     <div class="groups">
-        <!-- <draggable
+        <draggable
             v-model="pinned"
             v-bind="dragOptions"
             tag="section"
             @start="toggleDragging"
             @end="toggleDragging"
+            :group="{ put: false }"
             class="group"
         >
             <room-avatar
@@ -14,7 +15,7 @@
                 clickable
                 :room="room"
             />
-        </draggable> -->
+        </draggable>
 
         <draggable
             v-model="rooms"
@@ -22,6 +23,7 @@
             tag="section"
             @start="toggleDragging"
             @end="toggleDragging"
+            :group="{ put: false }"
             class="group"
         >
             <room-avatar
@@ -48,11 +50,11 @@ export default {
   data: () => ({
       drag: false,
       pinned: [
+          { name: 'Ola', accent: '#343090', not: 0 },
+          { name: 'Bom Dia', accent: '#5f59f7', not: 3 },
+        { name: 'Ahoj', accent: '#5f59f7', not: 10 },
           ],
       rooms: [
-        { name: 'Ola', accent: '#343090', not: 0 },
-        { name: 'Bom Dia', accent: '#5f59f7', not: 3 },
-        { name: 'Ahoj', accent: '#5f59f7', not: 10 },
         { name: 'Cus', accent: '#a1ffe3', not: 0 },
         { name: 'Cau', accent: '#44c2fd', not: 1 },
         { name: 'Oi', accent: '#8c61ff', not: 0 }
@@ -88,7 +90,7 @@ export default {
     height: 3.6em
     margin-right: 1em
     padding-right: @margin-right
-    border-right: 1px solid var(--border-color)
+    border-right: 1px solid alpha(#000, .1)
 
     & > *
       margin: 0.36em

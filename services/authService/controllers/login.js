@@ -70,7 +70,6 @@ async function login(req, res) {
                     if (err) return res.status(409).json({
                         message: 'Validating tokens has failed'
                     })
-
                     return res.status(200).json({
                         access_token: getAccessToken(),
                         refresh_token: reply

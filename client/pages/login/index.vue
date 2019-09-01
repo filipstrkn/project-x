@@ -93,20 +93,24 @@ export default {
             fetch('http://localhost:3002/auth/login', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    mode: 'cors'
                 },
                 body: JSON.stringify(this.form)
             })
             .then(res => {
-                if (res.status === 200) return res.json()
-                if (res.status >= 400 && res.status < 500) {
-                    // run and error dialog
-                }
+                return res.json()
+                // if (res.status === 200) return res.json()
+                // if (res.status >= 400 && res.status < 500) {
+                //     // run and error dialog
+                // }
             })
             .then(tokens => {
+                console.log('TOKEN', tokens)
+                localStorage.removeItem('xTokens')
                 localStorage.setItem('xTokens', JSON.stringify(tokens))
                 // Cookie.set('refresh', tokens.refresh_token)
-                this.$router.push('/')
+                this.$router.push('/app')
                 console.log(tokens.access_token)
                 // save tokens to local storage
                 // move to project page

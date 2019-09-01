@@ -1,6 +1,9 @@
 <template>
 
     <header>
+        <section class="header__logo">
+            <slot name="logo" />
+        </section>
         <section class="header__main" :class="{ 'scrolled': scrolled }">
             <slot name="main" />
         </section>
@@ -42,18 +45,20 @@ header
         overflow hidden
 
 .header__main
-    padding-left 1em
-
     &.scrolled
         white-space nowrap
         overflow-x scroll
         height calc(var(--header-height) + 25px)
         display block
 
+.header__logo,
 .header__actions
     flex-shrink 0
+    flex-grow 0
     display flex
     justify-content flex-end
-    padding-right 1em
+    padding 0 1em
+.header__logo
+    padding-right 0
 
 </style>
