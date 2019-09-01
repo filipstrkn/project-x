@@ -47,7 +47,7 @@ async function login(req, res) {
          *
          */
         const e = getRefreshToken(user._id)
-        redisClient.setnx(user._id, e, () => {
+        redisClient.setnx(user._id.toString(), e, () => {
 
             /**
              *

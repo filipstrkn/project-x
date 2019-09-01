@@ -1,18 +1,26 @@
-export default async function auth(context) {
-    // try {
-    //     const tokens = await localStorage.getItem('xTokens')
+export default async function auth({ store, redirect }) {
+    try {
+        const tokens = await localStorage.getItem('xTokens')
+        const { refresh_token } = JSON.parse(tokens)
+        if (!store.state.auth && !refresh_token) return redirect('/login')
 
-    //     const answer = await fetch('http://localhost:3002/auth/refresh', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: tokens
-    //     })
-    //     if (answer.status === 200) {
-    //         console.log('YEEEEEEY')
-    //     }
-    // } catch (err) {
-    //     console.log('Ooops. Here is your auth error', err)
-    // }
+
+        const answer = await fetch('http://localhost:3002/auth/login/check', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-refresh': refresh_token
+            }
+        })
+
+        if (answer.status === 200) {
+            store.commit('SET_AUTH', true, { root: true })
+            return
+        }
+
+        throw new Error()
+    } catch (err) {
+        store.commit('SET_AUTH', false, { root: true })
+        return redirect('/login')
+    }
 }

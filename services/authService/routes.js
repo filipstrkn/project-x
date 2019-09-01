@@ -2,7 +2,8 @@ const { Router } = require('express')
 const router = new Router()
 const signup = require('./controllers/signup')
 const login = require('./controllers/login')
-const { sendVerifyEmail, verifyUser } = require('./controllers/verify')
+const { sendVerifyEmail } = require('./controllers/verify')
+const check = require('./controllers/check')
 const refresh = require('./controllers/refresh')
 const getAcess = require('./controllers/getAccess')
 const verifyUserMiddleware = require('./middlewares/verifyUser')
@@ -42,7 +43,7 @@ router.post('/auth/signup', signup)
  */
 router.post('/auth/login', resolveRedisError, login)
 router.post('/auth/login/verify', sendVerifyEmail)
-// router.put('/auth/login/verify', verifyUser)
+router.get('/auth/login/check', check)
 
 /**
  *

@@ -1,7 +1,10 @@
 export default () => ({
 
 
-  auth: null
+  auth: false,
+  verified: true,
+  user: null,
+  room: null
 
 
 })
