@@ -30,13 +30,14 @@ export default {
 
 header
     position fixed
+    top 0
+    left 0
     display flex
     justify-content space-between
     width 100%
     height var(--header-height)
-    background-color alpha(#fff, .98)
+    background-color #fff
     overflow hidden
-    // background-color blue
 
     & > section
         flex-grow 1

@@ -1,12 +1,12 @@
 <template>
     <div class="groups">
-        <draggable
+
+        <!-- <draggable
             v-model="pinned"
             v-bind="dragOptions"
             tag="section"
             @start="toggleDragging"
             @end="toggleDragging"
-            :group="{ put: false }"
             class="group"
         >
             <room-avatar
@@ -15,7 +15,7 @@
                 clickable
                 :room="room"
             />
-        </draggable>
+        </draggable> -->
 
         <draggable
             v-model="rooms"
@@ -23,7 +23,6 @@
             tag="section"
             @start="toggleDragging"
             @end="toggleDragging"
-            :group="{ put: false }"
             class="group"
         >
             <room-avatar
@@ -34,9 +33,6 @@
             />
         </draggable>
 
-        <div class="add-property">
-            <i class="icon ion-md-add" />
-        </div>
   </div>
 </template>
 
@@ -57,6 +53,10 @@ export default {
       rooms: [
         { name: 'Cus', accent: '#a1ffe3', not: 0 },
         { name: 'Cau', accent: '#44c2fd', not: 1 },
+        { name: 'Cau', accent: '#44c2fd', not: 2 },
+        { name: 'Cau', accent: '#44c2fd', not: 0 },
+        { name: 'Cau', accent: '#44c2fd', not: 0 },
+        { name: 'Cau', accent: '#44c2fd', not: 0 },
         { name: 'Oi', accent: '#8c61ff', not: 0 }
       ]
   }),
@@ -84,49 +84,40 @@ export default {
     align-items: center
     height: var(--header-height)
 
+
   .group
     display: flex
     align-items: center
     height: 3.6em
     margin-right: 1em
     padding-right: @margin-right
-    border-right: 1px solid alpha(#000, .1)
+    // border-right: 1px solid alpha(#000, .1)
 
     & > *
       margin: 0.36em
 
 
 
-  & > section:last-of-type
-      margin-right: 0
-      padding-right: 0
-      border: none
+  // & > section:last-of-type
+  //     margin-right: 0
+  //     padding-right: 0
+  //     border: none
+  //     & > *
+  //       opacity .3
+  //       transition opacity 150ms ease-out
+
+  //     &:hover > *
+  //       opacity 1
 
 
 .actions
   padding: 0 1em
 
 
-.add-property
-  flex-shrink: 0
-  width: 2em
-  height: @width
-  border-radius: 100%
-  background-color: white
-  border: solid 1px var(--border-color)
-  display: flex
-  justify-content: center
-  align-items: center
-  margin: 0.36em
-  cursor: pointer
-  color: alpha(#000, 0.65)
 
-  &:hover
-    color: #000
-    border-color: @color
 
 .ghost
-    opacity 0
+    opacity 0 !important
 
 // .AHOJ
 //     background-color red !important

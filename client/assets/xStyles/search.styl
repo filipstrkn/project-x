@@ -1,0 +1,30 @@
+.x-search
+    position relative
+    margin 1.6em 0
+    border none
+    outline none
+    border solid 1px #cacaca
+    border-radius: 30em
+    transition: border-color 150ms ease-out
+    display: flex
+    align-items: center
+
+    &.active
+        border-color: #888
+        outline: none
+        & > label
+            font-size .65em !important
+            left 2.4em !important
+            top 1.2em !important
+
+
+    input
+        border: none
+        background: none
+        height 100%
+        width 100%
+        padding .45em 1.6em
+        font-size 1em
+
+    &.is-small
+        width 20em

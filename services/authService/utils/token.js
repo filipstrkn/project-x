@@ -11,7 +11,10 @@ const getAccessToken = () => jwt.sign(
         typ: 'access',
         aid: process.env.APP_ID
     },
-    process.env.JWT_SECRET, { expiresIn: process.env.JWT_LIFE }
+    process.env.JWT_SECRET,
+    {
+        expiresIn: process.env.JWT_LIFE
+    }
 )
 
 const getRefreshToken = userId => {
@@ -21,7 +24,7 @@ const getRefreshToken = userId => {
         uid: userId,
         aid: process.env.APP_ID
     },
-    process.env.REFRESH_SECRET, { expiresIn: expireInDays(process.env.REFRESH_LIFE) }
+    process.env.REFRESH_SECRET
 )}
 
 

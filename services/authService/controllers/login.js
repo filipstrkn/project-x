@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const UserModel = require('../models/User')
-const redisClient = require('../database/redisClient')
+const TokenModel = require('../models/Token')
 const { getAccessToken, getRefreshToken } = require('../utils/token')
 
 
@@ -10,6 +10,12 @@ const { getAccessToken, getRefreshToken } = require('../utils/token')
  *  Login
  *  ---
  *
+ *
+ *  Najit email
+ *  Overit heslo
+ *  najit refresh token
+ *  pokud existuje vratit s novym acess tokenem
+ *  pokud neexistuje vytvorit a vratit
  *
  */
 async function login(req, res) {
@@ -46,41 +52,37 @@ async function login(req, res) {
          *  is already existing in db or not.
          *
          */
-        const e = getRefreshToken(user._id)
-        redisClient.setnx(user._id.toString(), e, () => {
 
-            /**
-             *
-             *  In case that provided credentials are
-             *  valid. We try to find if the token
-             *  is already existing in db or not.
-             *
-             */
-            redisClient.get(user._id.toString(), (__, reply) => {
+        const token = await TokenModel.findOne({ userId: user._id })
 
-                /**
-                 *
-                 *  In case that provided credentials are
-                 *  valid. We try to find if the token
-                 *  is already existing in db or not.
-                 *
-                 */
-                jwt.verify(reply, process.env.REFRESH_SECRET, err => {
+        if (!token) {
+            const newToken = new TokenModel({
+                userId: user._id,
+                token: getRefreshToken(user._id)
+            })
 
-                    if (err) return res.status(409).json({
-                        message: 'Validating tokens has failed'
-                    })
-                    return res.status(200).json({
-                        access_token: getAccessToken(),
-                        refresh_token: reply
-                    })
-                })
+            await newToken.save()
 
+            return res.status(200).json({
+                access_token: getAccessToken(),
+                refresh_token: newToken
+            })
+        }
+
+        jwt.verify(token.token, process.env.REFRESH_SECRET, (err, decoded) => {
+            if (err) return res.status(409).json({
+                message: 'Validating tokens has failed'
+            })
+
+            if (
+                decoded.uid === user._id.toString() &&
+                decoded.aid === process.env.APP_ID
+            ) return res.status(200).json({
+                    access_token: getAccessToken(),
+                    refresh_token: token.token
             })
 
         })
-
-
 
     } catch (err) {
 

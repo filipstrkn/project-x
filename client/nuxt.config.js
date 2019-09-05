@@ -29,8 +29,10 @@ export default {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [
-  ],
+  plugins: [{
+    src: '@/plugins/VueLayers',
+    ssr: false
+  }],
   /*
   ** Nuxt.js dev-modules
   */
