@@ -17,7 +17,7 @@
         />
     </header-bar>
 
-    <ModalBlock />
+    <modal-block v-show="$store.state.quick" />
 
   </main>
 </template>
@@ -43,16 +43,15 @@ export default {
     key: false,
   }),
   mounted() {
-    document.addEventListener('keydown', (e) => {
-      if (e.metaKey && e.keyCode === 80) {
-        e.preventDefault()
-        document.body.style.background = 'blue'
-      }
-      if (e.key === 'Escape') {
-        e.preventDefault()
-        document.body.style.background = 'none'
-      }
-    })
+    // document.addEventListener('keydown', (e) => {
+    //   if (e.metaKey && e.keyCode === 80) {
+    //     e.preventDefault()
+    //     this.$store.commit('TOGGLE_QUICK')
+    //   }
+    //   if (this.$store.state.quick && e.key === 'Escape') {
+    //     this.$store.commit('TOGGLE_QUICK', false)
+    //   }
+    // })
   }
 }
 </script>

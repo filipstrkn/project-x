@@ -4,7 +4,8 @@ export default () => ({
   auth: false,
   verified: true,
   user: null,
-  room: null
+  room: null,
+  quick: false
 
 
 })

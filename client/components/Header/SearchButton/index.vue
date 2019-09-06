@@ -1,12 +1,20 @@
 <template>
-  <div class="search-button">
-      <i class="icon ion-md-search" />
-  </div>
+    <div
+        class="search-button"
+        @click="toggleQuick"
+    >
+        <i class="icon ion-md-search" />
+    </div>
 </template>
 
 <script>
 export default {
-    name: 'SearchButton'
+    name: 'SearchButton',
+    methods: {
+        toggleQuick() {
+            this.$store.commit('TOGGLE_QUICK')
+        }
+    }
 }
 </script>
 

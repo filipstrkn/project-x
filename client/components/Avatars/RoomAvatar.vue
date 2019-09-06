@@ -1,15 +1,12 @@
 <template>
-  <div class="room-avatar" :class="{ clickable }" :style="styles">
-      <NotificationBadge :notifications="room.not" />
+  <div class="room-avatar" :class="{ clickable, 'has-badge': room.not }" :style="styles">
+      <span v-if="room.not" />
   </div>
 </template>
 
 <script>
-import NotificationBadge from '@/components/Notification/NotificationBadge'
-
 export default {
     name: 'RoomAvatar',
-    components: { NotificationBadge },
     props: {
         clickable: {
             type: Boolean,
@@ -40,6 +37,17 @@ export default {
     background alpha(#000, .1)
     display inline-block
     position relative
+
+    &.has-badge::before
+        content ""
+        position absolute
+        top 0
+        right @top
+        width .5em
+        height @width
+        background-color red
+        border-radius 100%
+        z-index 2
 
     &.clickable
         position relative

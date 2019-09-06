@@ -1,22 +1,6 @@
 <template>
     <div class="groups">
 
-        <!-- <draggable
-            v-model="pinned"
-            v-bind="dragOptions"
-            tag="section"
-            @start="toggleDragging"
-            @end="toggleDragging"
-            class="group"
-        >
-            <room-avatar
-                v-for="(room, index) in pinned"
-                :key="`${room.name} + ${index}`"
-                clickable
-                :room="room"
-            />
-        </draggable> -->
-
         <draggable
             v-model="rooms"
             v-bind="dragOptions"
@@ -45,30 +29,23 @@ export default {
   components: { RoomAvatar, draggable },
   data: () => ({
       drag: false,
-      pinned: [
-          { name: 'Ola', accent: '#343090', not: 0 },
-          { name: 'Bom Dia', accent: '#5f59f7', not: 3 },
-        { name: 'Ahoj', accent: '#5f59f7', not: 10 },
-          ],
       rooms: [
-        { name: 'Cus', accent: '#a1ffe3', not: 0 },
-        { name: 'Cau', accent: '#44c2fd', not: 1 },
-        { name: 'Cau', accent: '#44c2fd', not: 2 },
-        { name: 'Cau', accent: '#44c2fd', not: 0 },
-        { name: 'Cau', accent: '#44c2fd', not: 0 },
-        { name: 'Cau', accent: '#44c2fd', not: 0 },
-        { name: 'Oi', accent: '#8c61ff', not: 0 }
+        { name: 'Cus', accent: '#ffead5', not: false },
+        { name: 'Cau', accent: '#d5e0ff', not: true },
+        { name: 'Cau', accent: '#ffd9d9', not: true },
+        { name: 'Cau', accent: '#ffd5fb', not: false },
+        { name: 'Cau', accent: '#ffead5', not: false },
+        { name: 'Cau', accent: '#ffead5', not: false },
+        { name: 'Oi', accent: '#ffead5', not: false }
       ]
   }),
   computed: {
-    dragOptions() {
-        return {
-        animation: 200,
-        group: "description",
-        disabled: false,
-        ghostClass: "ghost"
-        };
-    }
+    dragOptions: () => ({
+      animation: 150,
+      group: "description",
+      disabled: false,
+      ghostClass: "ghost"
+    })
   },
   methods: {
       toggleDragging() {
@@ -117,7 +94,14 @@ export default {
 
 
 .ghost
-    opacity 0 !important
+    // opacity 0 !important
+    background none !important
+    border dashed 1px var(--border-color)
+    &::after,
+    &::before
+      content ""
+      display none !important
+
 
 // .AHOJ
 //     background-color red !important
